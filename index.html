@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>알바 채팅 시뮬레이션</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 0;
+    }
+    #chatbox {
+      max-width: 600px;
+      margin: 30px auto;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    .message {
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 10px;
+      line-height: 1.5;
+    }
+    .user {
+      background-color: #d1e7dd;
+      text-align: right;
+    }
+    .client {
+      background-color: #f8d7da;
+      text-align: left;
+    }
+    #options {
+      display: none;
+      margin-top: 20px;
+      text-align: center;
+    }
+    .btn {
+      margin: 8px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+      border-radius: 8px;
+    }
+    .btn:hover {
+      opacity: 0.9;
+    }
+    .safe {
+      background-color: #0d6efd;
+      color: white;
+    }
+    .warn {
+      background-color: #dc3545;
+      color: white;
+    }
+    .image-result {
+      display: none;
+      text-align: center;
+      margin-top: 20px;
+    }
+    .image-result img {
+      max-width: 100%;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div id="chatbox">
+    <div class="message user">알바 문의드립니다.</div>
+    <div class="message client">연락 주셨네요. 아까 보신 공고 맞죠? 아주 간단한 일이에요. 시키는 대로만 하면 됩니다. 저희는 정확해요. 보수 50만원 약속합니다. 지금 바로 진행 가능하세요?</div>
+    <div class="message user">무슨 물건을 어디로 옮기는 건가요?</div>
+    <div class="message client">그건 저희가 다 알려드립니다. 중요한 물건이라서요. 내용물은 보실 필요 없어요. 그냥 전달만 해주시면 돼요. 계좌번호 알려주시면 계약금 10만원 바로 넣어드릴게요.</div>
+    <div class="message user">혹시 불법적인 일인가요?</div>
+    <div class="message client">에이, 그런 거 아니에요~ 그냥 저희가 급하게 보내야 할 물건이 있어서 심부름 부탁드리는 거예요. 누가 이런 일에 마약을 생각해요? 괜히 쫄지 마시고 시키는 대로만 하세요. 다음에도 저희 일하시면 더 좋은 조건으로 해드릴 수 있어요.</div>
+
+    <div id="options">
+      <button class="btn warn" onclick="showResult(1)">지시대로 알바 진행</button>
+      <button class="btn safe" onclick="showResult(2)">대화 중단 및 차단</button>
+      <button class="btn safe" onclick="showResult(3)">한국마약퇴치운동본부 또는 경찰에 신고</button>
+    </div>
+
+    <div class="image-result" id="resultImage">
+      <img id="resultImg" src="" alt="결과 이미지">
+    </div>
+
+    <div class="image-result" id="finalInfo">
+      <img src="123123123.png" alt="정보 이미지">
+    </div>
+  </div>
+
+  <script>
+    window.onload = () => {
+      document.getElementById("options").style.display = "block";
+    };
+
+    function showResult(choice) {
+      let imgPath = "";
+
+      if (choice === 1) {
+        imgPath = "0744ce96-e0c7-4be8-81a4-248cd3b8fb00.png"; // 잘못된 선택 → 어두운 이미지
+      } else {
+        imgPath = "ㅂㅈㄷㄱㅂㅈㄷㄱ.png"; // 바른 선택 → 밝은 이미지
+      }
+
+      document.getElementById("resultImg").src = imgPath;
+      document.getElementById("resultImage").style.display = "block";
+      document.getElementById("options").style.display = "none";
+
+      setTimeout(() => {
+        document.getElementById("finalInfo").style.display = "block";
+      }, 2000); // 2초 후 최종 안내 이미지 보여주기
+    }
+  </script>
+</body>
+</html>
