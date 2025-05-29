@@ -1,53 +1,59 @@
-
-const messages = [
-  { sender: 'user', text: '알바 문의드립니다.' },
-  { sender: 'client', text: '연락 주셨네요. 아까 보신 공고 맞죠? 아주 간단한 일이에요. 시키는 대로만 하면 됩니다. 저희는 정확해요. 보수 50만원 약속합니다. 지금 바로 진행 가능하세요?' },
-  { sender: 'user', text: '무슨 물건을 어디로 옮기는 건가요?' },
-  { sender: 'client', text: '그건 저희가 다 알려드립니다. 중요한 물건이라서요. 내용물은 보실 필요 없어요. 그냥 전달만 해주시면 돼요. 계좌번호 알려주시면 계약금 10만원 바로 넣어드릴게요.' },
-  { sender: 'user', text: '혹시 불법적인 일인가요?' },
-  { sender: 'client', text: '에이, 그런 거 아니에요~ 그냥 저희가 급하게 보내야 할 물건이 있어서 심부름 부탁드리는 거예요. 누가 이런 일에 마약을 생각해요? 괜히 쫄지 마시고 시키는 대로만 하세요. 다음에도 저희 일하시면 더 좋은 조건으로 해드릴 수 있어요.' }
-];
-
-const imageMap = {
-  1: "dark.jpg",     // 잘못된 선택
-  2: "bright.jpg",   // 올바른 선택
-  3: "bright.jpg"
-};
-
-const finalImage = "info.jpg";
-
-let index = 0;
+// 시뮬레이션 대화와 선택지 처리 (예시)
 const chatContainer = document.getElementById("chat-container");
+const choiceSection = document.getElementById("choice-section");
+const imageSection = document.getElementById("image-section");
+const resultImage = document.getElementById("result-image");
+const infoLink = document.getElementById("info-link");
 
-function showNextMessage() {
-  if (index < messages.length) {
-    const msg = document.createElement("div");
-    msg.classList.add("message", messages[index].sender);
-    msg.innerText = messages[index].text;
-    chatContainer.appendChild(msg);
-    index++;
-    setTimeout(showNextMessage, 1000);
-  } else {
-    // 대화 끝난 후 다음 화면으로 전환
-    setTimeout(() => {
-      document.getElementById("chat-section").classList.add("hidden");
-      document.getElementById("choice-section").classList.remove("hidden");
-    }, 1000);
-  }
-}
-
-function handleChoice(choiceNum) {
-  document.getElementById("choice-section").classList.add("hidden");
-  document.getElementById("image-section").classList.remove("hidden");
-
-  const img = document.getElementById("result-image");
-  img.src = imageMap[choiceNum];
-
+// 대화 시뮬레이션 시작 함수
+function startChat() {
+  chatContainer.innerHTML = "<p>채팅 시뮬레이션 시작...</p>";
   setTimeout(() => {
-    img.src = finalImage;
-  }, 5000);
+    chatContainer.innerHTML += "<p>수상한 사람이 이상한 부탁을 합니다.</p>";
+    choiceSection.classList.remove("hidden");
+  }, 1000);
 }
 
-window.onload = () => {
-  showNextMessage();
-};
+// 사용자가 선택지를 클릭했을 때 처리
+function handleChoice(choice) {
+  choiceSection.classList.add("hidden");
+
+  let imageSrc = "";
+  switch (choice) {
+    case 1:
+      imageSrc = "dark.jpg";
+      break;
+    case 2:
+      imageSrc = "bright.jpg";
+      break;
+    case 3:
+      imageSrc = "bright.jpg";
+      break;
+  }
+
+  // 결과 이미지 표시
+  showResultImage(imageSrc);
+
+  // 몇 초 후 안내 이미지 표시
+  setTimeout(() => {
+    showResultImage("info.jpg");
+  }, 2000);
+}
+
+// 결과 이미지 표시 함수 (링크 포함)
+function showResultImage(imageSrc) {
+  resultImage.src = imageSrc;
+
+  if (imageSrc.includes("info.jpg")) {
+    infoLink.href = "https://www.drugfree.or.kr/";
+    infoLink.style.pointerEvents = "auto";
+  } else {
+    infoLink.removeAttribute("href");
+    infoLink.style.pointerEvents = "none";
+  }
+
+  imageSection.classList.remove("hidden");
+}
+
+// 시작
+startChat();
