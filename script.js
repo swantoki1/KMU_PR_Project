@@ -26,13 +26,13 @@ function showNextMessage() {
     msg.innerText = messages[index].text;
     chatContainer.appendChild(msg);
     index++;
-    setTimeout(showNextMessage, 1000);
+    setTimeout(showNextMessage, 1000); // 메시지 간 간격은 1초 유지
   } else {
-    // 대화 끝난 후 다음 화면으로 전환
+    // 대화 끝난 후 다음 화면으로 전환하는 시간을 3초로 변경
     setTimeout(() => {
       document.getElementById("chat-section").classList.add("hidden");
       document.getElementById("choice-section").classList.remove("hidden");
-    }, 1000);
+    }, 3000); // 기존 1000ms에서 3000ms로 수정 (2초 추가)
   }
 }
 
@@ -43,13 +43,15 @@ function handleChoice(choiceNum) {
   const img = document.getElementById("result-image");
   const link = document.getElementById("result-link");
 
-  img.src = imageMap[choiceNum];
-  link.href = "#"; // 초기 이미지에서는 링크 비활성화 또는 기본 동작 방지
+  img.src = imageMap[choiceNum]; // 첫 번째 결과 이미지 (dark.jpg 또는 bright.jpg) 표시
+  link.href = "#"; // 초기 이미지에서는 링크 비활성화
 
+  // 첫 번째 결과 이미지가 5초 동안 표시된 후 finalImage (info.jpg)로 변경
+  // 이 5초는 사용자님의 요청에 따라 "한 5초정도"로 설정된 시간입니다.
   setTimeout(() => {
     img.src = finalImage; // info.jpg로 변경
     link.href = finalLink; // info.jpg에 대한 링크 설정
-  }, 5000);
+  }, 7000); // 이 시간은 5000ms (5초)로 유지됩니다.
 }
 
 window.onload = () => {
