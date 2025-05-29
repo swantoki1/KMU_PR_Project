@@ -1,4 +1,3 @@
-
 const messages = [
   { sender: 'user', text: '알바 문의드립니다.' },
   { sender: 'client', text: '연락 주셨네요. 아까 보신 공고 맞죠? 아주 간단한 일이에요. 시키는 대로만 하면 됩니다. 저희는 정확해요. 보수 50만원 약속합니다. 지금 바로 진행 가능하세요?' },
@@ -15,6 +14,7 @@ const imageMap = {
 };
 
 const finalImage = "info.jpg";
+const finalLink = "https://www.drugfree.or.kr/";
 
 let index = 0;
 const chatContainer = document.getElementById("chat-container");
@@ -41,10 +41,14 @@ function handleChoice(choiceNum) {
   document.getElementById("image-section").classList.remove("hidden");
 
   const img = document.getElementById("result-image");
+  const link = document.getElementById("result-link");
+
   img.src = imageMap[choiceNum];
+  link.href = "#"; // 초기 이미지에서는 링크 비활성화 또는 기본 동작 방지
 
   setTimeout(() => {
-    img.src = finalImage;
+    img.src = finalImage; // info.jpg로 변경
+    link.href = finalLink; // info.jpg에 대한 링크 설정
   }, 5000);
 }
 
